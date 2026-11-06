@@ -44,3 +44,4 @@ fun FormSiswa(
 ) {
     // edit 2 : tambahkan 4 variabel dibawah ini
     var txtNama by rememberSaveable { mutableStateOf("") }
+    var txtAlamat by rememberSaveable { mutableStateOf("") }
