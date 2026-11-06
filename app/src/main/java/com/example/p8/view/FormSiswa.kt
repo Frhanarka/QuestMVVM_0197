@@ -65,4 +65,103 @@ fun FormSiswa(
                 )
             )
         }
-    ) {
+    ) {isiRuang ->
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(isiRuang),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            // edit 3 : value, onValueChange, selected, onClick
+
+            OutlinedTextField(
+                value = txtNama,
+                onValueChange = {
+                    txtNama = it
+                },
+                singleLine = true,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier
+                    .width(250.dp)
+                    .padding(top = 20.dp),
+                label = {
+                    Text(text = stringResource(R.string.nama))
+                }
+            )
+
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .width(250.dp),
+                thickness = dimensionResource(R.dimen.thickness_divider),
+                color = Color.Blue
+            )
+
+            Text(
+                text = stringResource(R.string.gender)
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                pilihanJK.forEach { item ->
+                    Row(
+                        modifier = Modifier.selectable(
+                            selected = txtGender == item,
+                            onClick = {
+                                txtGender = item
+                            },
+                            role = Role.RadioButton
+                        ),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        RadioButton(
+                            selected = txtGender == item,
+                            onClick = null
+                        )
+
+                        Text(text = item)
+                    }
+                }
+            }
+
+            HorizontalDivider(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .width(250.dp),
+                thickness = dimensionResource(R.dimen.thickness_divider),
+                color = Color.Blue
+            )
+
+            OutlinedTextField(
+                value = txtAlamat,
+                onValueChange = {
+                    txtAlamat = it
+                },
+                singleLine = true,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.width(250.dp),
+                label = {
+                    Text(text = stringResource(R.string.alamat))
+                }
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Button(
+                modifier = Modifier.width(250.dp),
+                enabled = txtNama.isNotBlank() &&
+                        txtAlamat.isNotBlank() &&
+                        txtGender.isNotBlank(),
+                onClick = {
+                    onSubmitButtonClicked(listData)
+                }
+            ) {
+                Text(stringResource(R.string.submit))
+            }
+        }
+    }
+}
